@@ -1,0 +1,8 @@
+Flask
+FPDF
+Gunicorn
+matplotlib
+requests
+flask[async]
+flask_sqlalchemy
+psycopg2

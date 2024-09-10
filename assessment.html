@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainBuzz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            width: 100%;
+            height: 80px;
+            background-color: #aa98b5;
+            display: flex;
+            align-items: center;
+            color: #000;
+            padding: 0 40px;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensure navbar is on top */
+        }
+
+        .logo h1 {
+            font-size: 24px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu ul li {
+            margin-left: 50px;
+        }
+
+        .menu ul li a {
+            text-decoration: none;
+            color: #000;
+            padding: 12px 30px;
+            letter-spacing: 2px;
+            font-size: 15px;
+            border-radius: 12px;
+            border: 2px solid #000;
+            transition: 0.4s;
+        }
+
+        .menu ul li a:hover {
+            background-color: purple;
+            color: #fff;
+        }
+
+        .signup a {
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            padding: 12px 30px;
+            border: 2px solid #000;
+            transition: 0.6s;
+        }
+
+        .signup a:hover {
+            background-color: #aa98b5;
+        }
+
+        .body {
+            width: 100%;
+            height: calc(100vh - 80px); /* Adjust for navbar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            position: relative;
+            padding-top: 80px; /* Adjust for navbar height */
+        }
+
+        .content {
+            text-align: center;
+            color: #000;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 80%;
+            width: 600px;
+        }
+
+        .content h1 {
+            font-size: 44px;
+            margin-bottom: 20px;
+            color: purple;
+        }
+
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .content a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #6a1b9a;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .content a:hover {
+            background-color: #4a0072;
+        }
+
+        .footer {
+            background: #aa98b5;
+            color: white;
+            height: 50px;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        .footer-content {
+            font-family: sans-serif;
+            color: white;
+            font-size: 14px;
+        }
+
+        .glitch {
+            font-family: 'Rubik Glitch', sans-serif;
+            font-size: 48px;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            background: #fff;
+            padding: 10px;
+            border-radius: 12px;
+            animation: glitch 1s infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 1px 1px 0 #000, -1px -1px 0 #fff; }
+            20% { text-shadow: -1px -1px 0 #000, 1px 1px 0 #fff; }
+            40% { text-shadow: 1px 1px 0 #000, -1px -1px 0 #fff; }
+            60% { text-shadow: -1px -1px 0 #000, 1px 1px 0 #fff; }
+            80% { text-shadow: 1px 1px 0 #000, -1px -1px 0 #fff; }
+            100% { text-shadow: -1px -1px 0 #000, 1px 1px 0 #fff; }
+        }
+
+        @media (max-width: 430px) {
+            .navbar {
+                padding: 0 10px;
+            }
+
+            .logo h1 {
+                font-size: 20px;
+            }
+
+            .menu ul li {
+                margin-left: 15px;
+            }
+
+            .menu ul li a {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            .signup a {
+                font-size: 16px;
+                padding: 8px 15px;
+            }
+
+            .body {
+                padding-top: 60px; /* Adjusted for smaller navbar */
+            }
+
+            .content {
+                width: 90%;
+                padding: 15px;
+            }
+
+            .content h1 {
+                font-size: 28px;
+            }
+
+            .content p {
+                font-size: 16px;
+            }
+
+            .content a {
+                padding: 8px 15px;
+                font-size: 16px;
+            }
+
+            .footer {
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            .footer-content {
+                font-size: 12px;
+            }
+
+            .glitch {
+                font-size: 36px;
+                top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <h1>BrainBuzz</h1>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="/"><b>Home</b></a></li>
+                <!-- <li><a href="/index"><b>Assessment</b></a></li>
+                <li><a href="/about"><b>About Us</b></a></li> -->
+            </ul>
+        </div>
+        <div class="signup">
+            <a href="login">Register</a>
+        </div>
+    </div>
+    <div class="body">
+        <div class="content">
+            <h1>Welcome to BrainBuzz</h1>
+            <p>BrainBuzz is an advanced cognitive analysis app that optimizes mental performance through engaging assessments. With an intuitive interface, it provides personalized insights and recommendations. Adaptive learning ensures relevant challenges and tracks progress. BrainBuzz is the ultimate tool for boosting mental agility and monitoring cognitive health.</p>
+            <a href="/login">Analyse Yourself</a>
+        </div>
+        <div class="glitch">BrainBuzz</div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 My Website. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

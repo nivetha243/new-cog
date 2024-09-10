@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Assessment</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0c3fc, #8ec5fc); /* Light purple gradient */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            max-width: 100%;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            backdrop-filter: blur(8px);
+            overflow-y: auto;
+            position: relative;
+            box-sizing: border-box; /* Ensure padding and border are  included #75BDD6 in the element's total width and height */
+        }
+        .description {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center the description content horizontally */
+        }
+        .description-topic {
+            font-size: 24px;
+            font-weight: bold;
+            color: #a25cfc; /* Light purple color */
+            margin-bottom: 10px;
+        }
+        .description-text {
+            font-size: 18px;
+            color: #555;
+            max-width: 600px; /* Optional: limit the width of the description text for better readability */
+        }
+        .question {
+            min-height: 200px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, background-color 0.3s ease;
+        }
+        .question.active {
+            display: flex;
+            opacity: 1;
+        }
+        .question:hover {
+            background-color: rgba(162, 92, 252, 0.2); /* Light purple hover effect */
+        }
+        .question-number {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #8ec5fc; /* Light blue color */
+        }
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+            max-width: 600px; /* Optional: limit the width of the question text for better readability */
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center the options buttons horizontally */
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .options label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px; /* Optional: limit the width of the options for better alignment */
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid transparent; /* Initial border */
+            background-color: rgba(255, 255, 255, 0.7); /* Optional: background color */
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+            display: none; /* Hide the actual radio buttons */
+        }
+        .options label:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        /* New styles for selected option */
+        .options input[type="radio"]:checked + label {
+            background-color: #a25cfc; /* Change background color when selected */
+            border-color: #a25cfc; /* Change border color when selected */
+            color: #fff; /* Change text color when selected */
+        }
+        .submit {
+            margin-top: 20px;
+            display: none;
+        }
+        .submit.active {
+            display: block;
+        }
+        .submit button {
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid #a25cfc; /* Light purple color */
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #a25cfc; /* Light purple color */
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .submit button:hover {
+            background: #a25cfc; /* Light purple color */
+            color: #fff;
+        }
+        .navigation button {
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid #a25cfc; /* Light purple color */
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #a25cfc; /* Light purple color */
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .navigation button:hover {
+            background: #a25cfc; /* Light purple color */
+            color: #fff;
+        }
+        /* Media query for 430x932 resolution */
+@media (max-width: 430px) and (max-height: 932px) {
+    header {
+        padding: 0 10px; /* Reduced padding for smaller screens */
+        height: 50px; /* Adjusted header height */
+        flex-direction: row; /* Align logo and menu in a row */
+        align-items: center; /* Center align items */
+        justify-content: space-between; /* Space out logo and menu button */
+    }
+
+    header .logo img {
+        height: 40px; /* Further adjusted logo height */
+        margin-right: 5px; /* Reduced margin */
+    }
+
+    header .logo h1 {
+        font-size: 18px; /* Smaller font size */
+    }
+
+    header nav ul {
+        display: none; /* Hide navigation links by default */
+    }
+
+    header .mobile-menu-btn {
+        display: block; /* Show mobile menu button */
+    }
+
+    .mobile-menu {
+        display: block; /* Show mobile menu */
+    }
+
+    .main-content h2 {
+        font-size: 60px; /* Adjusted text size */
+        margin-bottom: 15px; /* Adjusted margin */
+    }
+
+    .main-content button {
+        padding: 10px 20px; /* Adjusted padding for the button */
+        font-size: 16px; /* Adjusted font size */
+    }
+
+    .overlay {
+        background: rgba(0, 0, 0, 0.6); /* Slightly lighter overlay */
+    }
+
+    .background-video {
+        object-fit: cover; /* Maintain cover fit */
+    }
+}
+
+    </style>
+    <script>
+        // Toggle the mobile menu
+        function toggleMenu() {
+            const menu = document.querySelector('.mobile-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="container" id="assessment-container">
+        <!-- Content will be dynamically loaded here -->
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000 });
+
+        const questions = {
+            empathy: [
+                "I actively listen to others and try to understand their feelings.",
+                "I can easily put myself in someone else's shoes.",
+                "I am sensitive to the moods and feelings of those around me.",
+                "I offer support and help when I see someone in distress.",
+                "I often think about how my actions affect others.",
+                "Imagine a colleague is visibly upset after receiving negative feedback on a project. How would you respond in this situation? Statement: I would offer to listen to their concerns and provide support.",
+                "When interacting with colleagues, I always take the time to listen to their concerns and try to understand their emotions before responding. I believe that showing empathy helps build stronger relationships and fosters a positive work environment.",
+
+            ],
+            adaptability: [
+                "I embrace change and see it as an opportunity for growth.",
+                "I quickly adjust my plans when circumstances change.",
+                "I am open to new ideas and approaches.",
+                "I handle unexpected challenges calmly and effectively.",
+                "I seek out new experiences to broaden my perspective.",
+                "During stressful situations, I stay calm and composed, tackling unexpected challenges with a positive attitude. I think maintaining a level-headed approach is crucial for effectively managing change.",
+                "When faced with unexpected changes at work, I see them as opportunities to learn and grow. I adapt my plans quickly and remain flexible, knowing that being adaptable is key to success in a dynamic environment."
+            ],
+            communication: [
+                "I clearly express my thoughts and ideas.",
+                "I effectively communicate in both verbal and written forms.",
+                "I actively seek feedback to improve my communication skills.",
+                "I adjust my communication style based on the audience.",
+                "I can resolve conflicts through effective communication.",
+                "I adapt my communication style to suit different audiences, whether I am speaking with a colleague, a client, or a manager. I think being versatile in communication helps me connect with people more effectively.",
+                "I take the time to give and receive feedback constructively, aiming to continuously improve my communication skills. I believe that feedback is essential for personal and professional growth."
+            ]
+        };
+
+        const descriptions = {
+            empathy: "Empathy involves understanding and sharing the feelings of others. It is crucial for building strong relationships and fostering a supportive environment.",
+            adaptability: "Adaptability is the ability to adjust to new conditions and changes. It reflects your flexibility and openness to new experiences and challenges.",
+            communication: "Effective communication is key to successful interactions. It includes expressing ideas clearly, listening actively, and adjusting your communication style based on your audience."
+        };
+
+        let currentCategory = 'empathy';
+        const responses = {
+            empathy: [],
+            adaptability: [],
+            communication: []
+        };
+
+        function loadDescription() {
+            const container = document.getElementById('assessment-container');
+            container.innerHTML = '';
+
+            const descriptionDiv = document.createElement('div');
+            descriptionDiv.className = `description category-${currentCategory}`;
+            descriptionDiv.dataset.aos = 'fade-up';
+
+            const descriptionText = descriptions[currentCategory];
+            descriptionDiv.innerHTML = `
+                <div class="description-topic">${currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1)}</div>
+                <p class="description-text">${descriptionText}</p>
+                <div class="navigation">
+                    <button onclick="startQuestions()">Start ${currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1)} Questions</button>
+                </div>
+            `;
+
+            container.appendChild(descriptionDiv);
+        }
+
+                function startQuestions() {
+            loadQuestions();
+        }
+
+        function loadQuestions() {
+            const container = document.getElementById('assessment-container');
+            container.innerHTML = '';
+
+            questions[currentCategory].forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.dataset.aos = 'fade-up';
+                if (index === 0) questionDiv.classList.add('active');
+
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${question}</div>
+                    <div class="options">
+                        <input type="radio" id="q${index}a1" name="response${index}" value="1" onclick="recordResponse(${index}, 1)">
+                        <label for="q${index}a1"> Strongly Disagree</label>
+                        <input type="radio" id="q${index}a2" name="response${index}" value="2" onclick="recordResponse(${index}, 2)">
+                        <label for="q${index}a2"> Disagree</label>
+                        <input type="radio" id="q${index}a3" name="response${index}" value="3" onclick="recordResponse(${index}, 3)">
+                        <label for="q${index}a3"> Neutral</label>
+                        <input type="radio" id="q${index}a4" name="response${index}" value="4" onclick="recordResponse(${index}, 4)">
+                        <label for="q${index}a4"> Agree</label>
+                        <input type="radio" id="q${index}a5" name="response${index}" value="5" onclick="recordResponse(${index}, 5)">
+                        <label for="q${index}a5"> Strongly Agree</label>
+                    </div>
+                `;
+
+                container.appendChild(questionDiv);
+            });
+
+            const submitDiv = document.createElement('div');
+            submitDiv.className = 'submit';
+            submitDiv.dataset.aos = 'fade-up';
+            submitDiv.innerHTML = `
+                <div class="navigation">
+                    <button onclick="submitResponses()">Submit ${currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1)} Responses</button>
+                </div>
+            `;
+            container.appendChild(submitDiv);
+        }
+
+        function recordResponse(questionIndex, response) {
+            responses[currentCategory][questionIndex] = response;
+
+            const nextQuestion = document.querySelector(`.question:nth-child(${questionIndex + 2})`);
+            if (nextQuestion) {
+                nextQuestion.classList.add('active');
+                nextQuestion.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            if (questionIndex === questions[currentCategory].length - 1) {
+                document.querySelector('.submit').classList.add('active');
+                document.querySelector('.submit').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function submitResponses() {
+            if (currentCategory === 'empathy') {
+                currentCategory = 'adaptability';
+            } else if (currentCategory === 'adaptability') {
+                currentCategory = 'communication';
+            } else {
+                   alert("please wait while your responses are being processed....")
+                sendResponses();
+                return;
+            }
+            loadDescription();
+        }
+
+        function sendResponses() {
+            fetch('/submit_responses', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(responses)
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = 'result';
+            });
+
+            console.log(responses); // For debugging purposes
+        }
+
+        // Load initial description
+        loadDescription();
+    </script>
+</body>
+</html>
+

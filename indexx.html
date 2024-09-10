@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden; /* Hide scrollbars */
+            position: relative; /* Position relative for video overlay */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to right, #000, #6a0dad, #CCCCFF); /* Gradient from black to purple */
+            color: white;
+            padding: 0 20px; /* Padding on left and right */
+            width: 100%; /* Full width of the viewport */
+            height: 60px; /* Adjust as needed */
+            box-sizing: border-box; /* Ensure padding is included in the element's width and height */
+            position: fixed; /* Keep header fixed at the top */
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensure it stays above other content */
+        }
+
+        header .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo img {
+            height: 60px; /* Adjust as needed */
+            margin-right: 10px; /* Adjust for spacing */
+        }
+
+        header .logo h1 {
+            margin: 0;
+            font-size: 24px; /* Adjust as needed */
+            color: white; /* Ensure the logo text is white */
+        }
+
+        header nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center; /* Center align items */
+        }
+
+        header nav ul li {
+            margin-left: 20px;
+        }
+
+        header nav ul li a {
+            color: white; /* Ensure navigation links are white */
+            text-decoration: none;
+            font-size: 18px; /* Adjust as needed */
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .mobile-menu-btn {
+            display: none; /* Hidden by default */
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 60px; /* Position below the header */
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9); /* Dark background for mobile menu */
+            z-index: 1000; /* Ensure it is above other content */
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            font-size: 18px;
+        }
+
+        .mobile-menu a:hover {
+            background: #6a0dad;
+        }
+
+        .main-content {
+            text-align: center;
+            position: relative; /* Ensure content is positioned above the video */
+            z-index: 10; /* Ensure content is above the video */
+        }
+
+        .main-content h2 {
+            font-size: 130px; /* Adjust as needed */
+            margin-bottom: 20px;
+            color: #CCCCFF;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect for the text */
+            transition: color 0.3s, -webkit-text-stroke 0.3s; /* Add transition for stroke effect */
+        }
+
+        .main-content h2:hover {
+            color: transparent; /* Make text color transparent */
+            -webkit-text-stroke: 2px white; /* Add white stroke effect */
+        }
+
+        /* Button styling */
+        .main-content button {
+             background-color: #6a0dad; /* Button color */
+             color: white;
+             border: none;
+             padding: 15px 30px; /* Increased padding for a larger button */
+             font-size: 22px; /* Increased font size */
+             cursor: pointer;
+             border-radius: 30px; /* Adjusted for a more rounded button */
+             transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added transition for shadow effect */
+             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4); /* Shadow effect */
+        }
+
+        /* Button hover state */
+        .main-content button:hover {
+             background-color: #4a0081; /* Darker button color on hover */
+             box-shadow: 0px 8px 15px rgba(0, 0, 0, 4); /* Enhanced shadow effect on hover */
+        }
+
+        /* Fullscreen background video */
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0; /* Ensure video is behind all other content */
+        }
+
+        /* Light transparent black overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Light transparent black */
+            z-index: 5; /* Ensure overlay is between the video and content */
+        }
+
+        /* Media query for mobile view */
+        @media (max-width: 430px) {
+            header {
+                padding: 0 10px; /* Reduced padding */
+                height: 50px; /* Adjusted header height */
+                flex-direction: column; /* Stack logo and menu vertically */
+                align-items: flex-start; /* Align items to the start */
+            }
+
+            header .logo img {
+                height: 50px; /* Adjusted logo height */
+            }
+
+            header .logo h1 {
+                font-size: 20px; /* Adjusted font size */
+            }
+
+            header nav ul {
+                display: none; /* Hide navigation links by default */
+                flex-direction: column; /* Stack navigation links vertically */
+                width: 100%; /* Full width of the viewport */
+            }
+
+            header .mobile-menu-btn {
+                display: block; /* Show mobile menu button */
+            }
+
+            .mobile-menu {
+                display: block; /* Show mobile menu */
+            }
+
+            .main-content h2 {
+                font-size: 80px; /* Adjusted font size */
+                margin-bottom: 15px;
+            }
+
+            .main-content button {
+                padding: 10px 20px; /* Adjusted padding */
+                font-size: 18px; /* Adjusted font size */
+            }
+        }
+    </style>
+    <script>
+        // Toggle the mobile menu
+        function toggleMenu() {
+            const menu = document.querySelector('.mobile-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</head>
+<body>
+    <video class="background-video" autoplay muted loop>
+        <source src="https://videos.pexels.com/video-files/5725960/5725960-uhd_2560_1440_30fps.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <header>
+        <div class="logo">
+            <img src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded_nologo400/28797043/28797043-1659123433092-df655d5d30012.jpg" alt="Logo">
+            <h1>Brain buzZ</h1>
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        <nav>
+            <ul>
+                <!-- <li><a href="/home">Home</a></li> -->
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/assesment">Cognitive Assessment</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="mobile-menu">
+        <!-- <a href="/home">Home</a> -->
+        <a href="/about">About Us</a>
+        <a href="/assesment">Cognitive Assessment</a>
+    </div>
+
+    <div class="main-content">
+        <h2>Brain buzZ</h2>
+        <button onclick="window.location.href='/login'">Register</button>
+    </div>
+</body>
+</html>

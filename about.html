@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .section {
+            width: 100%;
+            background-color: #f9f9f9;
+            padding: 50px 0;
+        }
+
+        .section .container {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .container .title {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .container .title h1 {
+            text-transform: uppercase;
+            font-size: 35px;
+            color: #aa98b5;
+        }
+
+        .container .title h1::after {
+            content: "";
+            height: 5px;
+            width: 100px;
+            background-color: #aa98b5;
+            border-radius: 25px;
+            display: block;
+            margin: auto;
+        }
+
+        .content {
+            width: 55%;
+            padding-right: 20px;
+        }
+
+        .image-section {
+            width: 40%;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 25px;
+        }
+
+        .content .article h3 {
+            color: #a3a3a3;
+            font-size: 17px;
+        }
+
+        .content .article p {
+            margin-top: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            text-align: justify;
+        }
+
+        .content .article .button {
+            margin-top: 50px;
+        }
+
+        .content .article .button a {
+            text-decoration: none;
+            padding: 8px 25px;
+            background-color: #aa98b5;
+            border-radius: 40px;
+            color: #fff;
+            font-size: 18px;
+            letter-spacing: 1.5px;
+        }
+
+        .content .article .button a:hover {
+            color: #fff;
+            background-color: purple;
+            transition: 1s ease-in;
+        }
+
+        /* Media Query for devices around 430x932 pixels */
+        @media screen and (max-width: 430px) {
+            .section .container {
+                width: 95%;
+            }
+
+            .content {
+                width: 100%;
+                padding-right: 0;
+                margin: auto;
+            }
+
+            .image-section {
+                width: 100%;
+                margin-top: 20px;
+            }
+
+            .image-section img {
+                border-radius: 15px;
+            }
+
+            .container .title h1 {
+                font-size: 28px;
+            }
+
+            .content .article h3 {
+                font-size: 15px;
+            }
+
+            .content .article p {
+                font-size: 14px;
+            }
+
+            .content .article .button {
+                text-align: center;
+            }
+
+            .content .article .button a {
+                padding: 6px 15px;
+                font-size: 16px;
+            }
+        }
+
+        /* Additional styles for very small screens (if needed) */
+        @media screen and (max-width: 375px) {
+            .container .title h1 {
+                font-size: 24px;
+            }
+
+            .content .article h3 {
+                font-size: 14px;
+            }
+
+            .content .article p {
+                font-size: 13px;
+            }
+
+            .content .article .button a {
+                padding: 5px 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <div class="container">
+            <div class="title">
+                <h1>About Us</h1>
+            </div>
+            <div class="content">
+                <div class="article">
+                    <h3>Welcome to our Cognitive Assessment website, where we believe in the power of understanding and enhancing human potential.</h3>
+                    <p>Our mission is to provide comprehensive cognitive evaluations that focus on key areas such as empathy, adaptability, and communication.</p>
+                    <p>We understand that these skills are vital for personal growth, effective teamwork, and successful interactions in everyday life. Our assessments are designed to help individuals and organizations recognize strengths and identify areas for improvement. By fostering empathy, we aim to enhance interpersonal relationships; by measuring adaptability, we support resilience in the face of change; and by evaluating communication skills, we promote clearer and more effective interactions.</p>
+                    <p>Join us in our commitment to unlocking cognitive potential and improving the way we connect, adapt, and communicate.</p>
+                    <div class="button">
+                        <a href="/">Home</a>
+                    </div>
+                </div>
+            </div>
+            <div class="image-section">
+                <img src="https://i.pinimg.com/564x/31/ec/e4/31ece4690c849aed5ce7594738ef09fd.jpg" alt="Cognitive">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
